@@ -4,14 +4,16 @@
   "description": "contact list ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"npx nodemon app.js\" \"cd contactlist & npm start\""
   },
   "author": "khawla",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^10.0.0",
+    "concurrently": "^6.2.1",
+    "dotenv": "^10.0.0", 
     "express": "^4.17.1",
-    "mongoose": "^5.13.7"
+    "mongoose": "^5.13.7",
+    "redux": "^4.1.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
