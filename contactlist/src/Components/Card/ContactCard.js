@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import contact from '../Header/contact.png'
-import editContact  from '../Header/editContact.png';
-import deleteContact  from '../Header/deletecontact.png';
+import ctc from '../Header/assets/contact.png'
+import editContact  from '../Header/assets/editContact.png';
+import deletectc  from '../Header/assets/deletecontact.png';
 import {Link} from 'react-router-dom'
+import { deleteContact, getContact, toggleTrue } from '../../redux/actions/ContactActions';
+import { useDispatch } from 'react-redux';
 
 
 
@@ -58,19 +60,21 @@ justify-content: space-around;
 
 
 
-export default function ContactCard() {
+export default function ContactCard({contact}) {
+
+                    const dispatch=useDispatch();
+                    
                     return (            
                                        <ContactStyled> 
-                                        <IllustrationStyled src ={contact}/>
+                                        <IllustrationStyled src ={ctc}/>
                                         <CardStyled>
-                                        <h3> Name : {'khawla'} </h3>
-                                        <h3> Email :  {'kahwla@gmail.com'} </h3>
-                                        <h3> Age : {27} </h3>
+                                        <h3> Name : {contact.name} </h3>
+                                        <h3> Email :  {contact.email} </h3>
+                                        <h3> Age : {contact.age} </h3>
                                         </CardStyled>
                                         <AddDelete>
-                                        {/* mettre un lien ici  */}
-                                        <Link to = '/editcontact'><HomeStyled  src = {editContact} title = 'edit contact'/> </Link>
-                                        <HomeStyled src = {deleteContact} title=' delete contact '/>
+                                        <Link to = '/editcontact'><HomeStyled  src = {editContact} title = 'edit contact'   onClick= {()=>{dispatch(toggleTrue());dispatch(getContact(contact._id))}} /> </Link>
+                                        <HomeStyled src = {deletectc} title=' delete contact' onClick={()=>dispatch(deleteContact(contact._id))} />
                                         </AddDelete>
                                         </ContactStyled>
                                         

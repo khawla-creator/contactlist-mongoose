@@ -31,7 +31,7 @@ export default function Others() {
                     return (
                                         <OtherStyle>
                                                             <Illustration src = {flower} alt = 'flower' />
-                                                            <h1> there is nothing here it's just for fun 😁😋🤗</h1>
+                                                            <h1> there is nothing here , it's just for fun 😁😋🤗</h1>
                                         </OtherStyle>
                     )
 }
