@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {GET_CONTACTS, TOGGLE_TRUE, TOGGLE_FALSE} from '../constants/contactTypes';
+import {GET_CONTACTS, TOGGLE_TRUE, TOGGLE_FALSE,GET_CONTACT} from '../constants/contactTypes';
 
 
 
@@ -49,9 +49,19 @@ export const togglefalse=()=> {
 export const getContact =(id)=>async(disptach)=>{
                     try{
                     const res = await axios.get(`/api/contacts/${id}`)
-                    disptach({ type:GET_CONTACTS,payload:res.data.contact})
-
+                    console.log(res.data)
+                    disptach({type:GET_CONTACT,payload:res.data.contact})
                     }catch(error){
                                         console.log(error)
+                    }
+}
+
+
+export const editContact=(id,newValue)=>async(dispatch)=>{
+                    try{ 
+                                        await axios.put(`/api/contacts/${id}`,newValue)
+                                        dispatch(getContacts())
+                    } catch (error){
+                    console.log(error)
                     }
 }

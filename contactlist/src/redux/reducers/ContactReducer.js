@@ -3,7 +3,7 @@ import { GET_CONTACTS, TOGGLE_TRUE, TOGGLE_FALSE, GET_CONTACT } from './../const
 const initialState = {
                     contacts : [],
                     edit:false,
-                    contact:{}
+                    contact: {}
 };
 
 const contactReducer = (state=initialState,action) =>{
