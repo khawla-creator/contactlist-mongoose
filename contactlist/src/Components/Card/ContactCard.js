@@ -60,6 +60,7 @@ justify-content: space-around;
 
 
 
+
 export default function ContactCard({contact}) {
 
                     const dispatch=useDispatch();
@@ -73,7 +74,7 @@ export default function ContactCard({contact}) {
                                         <h3> Age : {contact.age} </h3>
                                         </CardStyled>
                                         <AddDelete>
-                                        <Link to = '/editcontact'><HomeStyled  src = {editContact} title = 'edit contact'   onClick= {()=>{dispatch(toggleTrue());dispatch(getContact(contact._id))}} /> </Link>
+                                        <Link to = '/editcontact'><HomeStyled  src = {editContact} title = 'edit contact' onClick={()=>{dispatch(toggleTrue());dispatch(getContact(contact._id))}}/> </Link>
                                         <HomeStyled src = {deletectc} title=' delete contact' onClick={()=>dispatch(deleteContact(contact._id))} />
                                         </AddDelete>
                                         </ContactStyled>

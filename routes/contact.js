@@ -4,13 +4,11 @@ const Contact = require('../models/Contact')
 
 //test
 // methode get
-// router.get('/test',(req,res)=>{
-//                     res.send('hello every bady')
-// });
+router.get('/test',(req,res)=>{
+                    res.send('hello every bady')
+});
 
 // add new contact
-// methode post 
-// req.body
 router.post('/', async (req,res)=>{
                     const {name,email,age}=req.body
                     try{
@@ -37,7 +35,7 @@ router.get('/',async (req,res)=>{
                     }
 })
 //======================
-router.delete('/:ID',async (req,res)=>{
+router.delete('/:ID',async (req,res)=>{ 
                     const {ID} = req.params
                     try {
                                         await Contact.findByIdAndDelete(ID) // un problem ici 
@@ -62,10 +60,10 @@ router.get('/ID',async (req,res)=>{
                     const {ID}= req.params
                     try {
                                         const contact = await Contact.findById(ID)
-                                        res.status(200).send({msg: 'cpntact', contact})
+                                        res.status(200).send({msg:'contact',contact})
                     } catch (error) {
                                         res.status(500).send({msg:'impossible to get contact', error})     
                     }
 })
 
-module.exports= router;
+module.exports= router;   

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import styled from 'styled-components'
 import {FaPlusCircle} from 'react-icons/fa'
 import {FaUserEdit} from 'react-icons/fa'
@@ -6,6 +6,7 @@ import flower from './flower.svg'
 import flowerBlue from './flowerBlue.svg'
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact, editContact } from '../../redux/actions/ContactActions'
+
 
 
 
@@ -64,12 +65,15 @@ left:138px;
 
 
 
-export default function AddContact() {
+export default function AddContact({history}) {
                     const [contact,setContact]=useState({name:"",email:"",age:0});
                     
                     const edit = useSelector(state=>state.contactReducer.edit)
-                    const editContact =useSelector(state=>state.contactReducer.editContact)
-                    
+                    const editcontact =useSelector(state=>state.contactReducer.contact);
+
+                    useEffect(()=>{
+                                        edit? setContact(editcontact): setContact({name:"",email:"",age:0})
+                    },[edit,editcontact])
                     
                     const handleChange=(e)=> {
                                         setContact({...contact,[e.target.name]:e.target.value})
@@ -81,20 +85,20 @@ export default function AddContact() {
                                         <div>
                                         <StyledAdd >
                                                             <IllustrationPink src={flower} alt=' flower' />
+                                                            {/* ici j'ai remplacée for par forhtml pour enlever le warnig au niveau de console */}
+                                                            <StyledLabel forhtml = 'userName'>  Name * </StyledLabel>
+                                                            <StyledInput type= 'text' name='name' id = 'userName' placeholder= " write your name" onChange={handleChange} value={contact.name}/>
                                                             
-                                                            <StyledLabel for = 'userName'>  Name * </StyledLabel>
-                                                            <StyledInput type= 'text' name='name' id = 'userName' placeholder= " write your name" onChange={handleChange}/>
-                                                            
-                                                            <StyledLabel for= 'userEmail'>  email * </StyledLabel> 
-                                                            <StyledInput  type= 'email' name='email' id = 'userEmail' placeholder= " write your email" onChange={handleChange}/>
+                                                            <StyledLabel forhtml= 'userEmail'>  email * </StyledLabel> 
+                                                            <StyledInput  type= 'email' name='email' id = 'userEmail' placeholder= " write your email" onChange={handleChange} value={contact.email}/>
 
-                                                            <StyledLabel for = 'userAge'> Age * </StyledLabel> 
-                                                            <StyledInput type= 'number' name='age' id = 'userAge' placeholder= " write your age" onChange={handleChange}/>
+                                                            <StyledLabel forhtml  = 'userAge'> Age * </StyledLabel> 
+                                                            <StyledInput type= 'number' name='age' id = 'userAge' placeholder= " write your age" onChange={handleChange} value={contact.age}/>
                                                             
                                                             {
-                                                                                edit ? <StyledButton > <FaUserEdit onClick={()=>dispatch(editContact(editContact._id,contact))}/> </StyledButton>
+                                                                                edit ? <StyledButton > <FaUserEdit onClick={()=>{dispatch(editContact(editcontact._id,contact));history.push('/')}}/> </StyledButton>
                                                                                 :
-                                                                                <StyledButton > <FaPlusCircle onClick={()=>dispatch(addContact(contact))} /> </StyledButton> 
+                                                                                <StyledButton > <FaPlusCircle onClick={()=>{dispatch(addContact(contact));history.push('/')}} /> </StyledButton> 
                                                             }
 
                                                             
